@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ファイルをテキストで読み込むサンプル</title>
+</head>
+<body>
+  <h1>ファイルをテキストで読み込むサンプル</h1>
+
+  <input type="file" id="file" />
+  <textarea id="textarea" readonly>
+  </textarea>
+
+  <script>
+    const textarea = document.querySelector('#textarea');
+    document.querySelector('#file').addEventListener('change', e => {
+      if (e.target.files[0]) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = e => {
+          textarea.value = e.target.result;
+        };
+        // BlobまたはFileをテキストとして読み込む
+        // 第2引数にencodingを指定可能、
+        // 指定しない場合はUTF8として読み込み
+        reader.readAsText(file);
+      }
+    });
+  </script>
+</body>
+</html>
